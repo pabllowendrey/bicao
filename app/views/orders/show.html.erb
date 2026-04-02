@@ -14,7 +14,21 @@
   <dt>Customer:</dt>
   <dd><%= @order.customer.name %></dd>
 
+  <br>
+  
+  <dd>
+    <ul>
+      <% @order.product_orders.each do |po| %>
+      <li>
+        <%=  po.product.name %> - Preço R$ - <%= po.product.price %> 
+      </li>
+      <% end %>
+    </ul>
+  </dd>
+
+  <br>
+  
   <dt>Total price:</dt>
-  <dd><%= @order.total_price %></dd>
+  <dd> R$ <%= @order.total_price %></dd>
 
 </dl>
