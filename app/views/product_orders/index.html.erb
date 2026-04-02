@@ -1,0 +1,36 @@
+<div class="page-header">
+  <%= link_to new_order_product_order_path(@order), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    Novo Pedido Produto
+  <% end %>
+  <h1>Lista itens Pedidos</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Pedido</th>
+        <th>Produto</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @product_orders) do |product_order| %>
+        <td><%= product_order.order.id %></td>
+        <td><%= product_order.product.name %></td>
+        <td><%= product_order.price %></td>
+        <td><%= product_order.amount %></td>
+        <td><%= link_to 'Mostrar', order_product_order_path(@order, product_order) %></td>
+        <td><%= link_to 'Editar', edit_order_product_order_path(@order, product_order) %></td>
+        <td><%= link_to 'Deletar', order_product_order_path(@order, product_order), 
+          method: :delete, data: { confirm: 'Confirmar?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

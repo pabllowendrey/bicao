@@ -10,19 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_03_26_183519) do
+ActiveRecord::Schema.define(version: 2026_04_02_025726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "cpf"
+    t.string "fone"
+    t.string "email"
+    t.string "cep"
+    t.string "address"
+    t.string "number"
+    t.string "district"
+    t.string "city"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.float "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
+  create_table "product_orders", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "product_id"
+    t.float "price"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["product_id"], name: "index_product_orders_on_product_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "amount"
-    t.bigint "type_products_id"
+    t.bigint "type_product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["type_products_id"], name: "index_products_on_type_products_id"
+    t.float "price"
+    t.index ["type_product_id"], name: "index_products_on_type_product_id"
   end
 
   create_table "type_products", force: :cascade do |t|
@@ -31,5 +66,8 @@ ActiveRecord::Schema.define(version: 2026_03_26_183519) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "products", "type_products", column: "type_products_id"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "product_orders", "orders"
+  add_foreign_key "product_orders", "products"
+  add_foreign_key "products", "type_products"
 end

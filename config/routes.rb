@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :orders do
+    resources :product_orders
+  end
+  resources :customers
   resources :products
   root to: 'home#index'
   get '/home', to: 'home#index'

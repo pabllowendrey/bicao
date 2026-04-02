@@ -7,20 +7,23 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Editar
   <% end %>
-  <h1>Mostrar product</h1>
+  <h1>Mostrar Produto</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Name:</dt>
+  <dt>Nome:</dt>
   <dd><%= @product.name %></dd>
 
-  <dt>Description:</dt>
+  <dt>Descrição:</dt>
   <dd><%= @product.description %></dd>
 
-  <dt>Amount:</dt>
+  <dt>Quantidade:</dt>
   <dd><%= @product.amount %></dd>
 
-  <dt>Type products:</dt>
-  <dd><%= @product.type_products %></dd>
+  <dt>Tipo produto:</dt>
+  <dd><%= @product.type_product.name %></dd>
+
+  <dt>Preço:</dt>
+  <dd><%= "R$ #{@product.price}" %></dd>
 
 </dl>
