@@ -3,7 +3,7 @@ class ProductOrdersController < ApplicationController
   before_action :set_product_order, only: %i[ show edit update destroy ]
 
   def index
-    @product_orders = @order.product_orders
+    @product_orders = @order.product_orders.where(order_id: @order.id)
   end
 
   def show
@@ -18,6 +18,7 @@ class ProductOrdersController < ApplicationController
 
   def create
     @product_order = @order.product_orders.build(product_order_params)
+    @product_order.order = @order
 
     respond_to do |format|
       if @product_order.save
