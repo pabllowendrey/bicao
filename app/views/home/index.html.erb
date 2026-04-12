@@ -1,23 +1,78 @@
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <% @products.each do |product| %>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                <%= product.name %>
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:tumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em"><%= product.name %></text></svg>
-                    <div class="card-body">
-                        <p class="card-text"><%= product.description %></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Add no carrinho</button>
-                            </div>
-                            <small class="text-muted">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <% end %>    
-        </div>   
+<div class="row">
+  <div class="col-lg-3">
+    <h1 class="my-4">Categorias</h1>
+    <div class="list-group">
+      <% TypeProduct.all.each do |type_product| %>
+        <a href="/?type_product=<%= type_product.id %>" class="list-group-item"><%= type_product.name %></a>
+      <% end %>
     </div>
+  </div>
+
+  <div class="col-lg-9">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="img-responsive" src="https://www.wearewhatweeat.co.nz/content/dam/wawwe/Recipes/recipe-banners-1600x530/old-smokey-burger-1600x1530.jpg" alt="First slide">
+        </div>
+        <div class="item">
+          <img class="img-responsive" src="https://www.wearewhatweeat.co.nz/content/dam/wawwe/Recipes/recipe-banner-small-desktop-1440x530/Stovetop-Chicken-Biriyani-1440x530-B.jpg" alt="Second slide">
+        </div>
+        <div class="item">
+          <img class="img-responsive" src="https://www.wearewhatweeat.co.nz/content/dam/wawwe/Recipes/recipe-banner-small-desktop-1440x530/One-Pot-Mac-Cheese-1440x530-B.jpg" alt="Third slide">
+        </div>
+      </div>
+
+      <a class="left carousel-control" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="right carousel-control" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+      <% if @products.blank? %>
+        <h5>Nenhum produto encontrado</h5>
+      <% else %>
+        <div class="container-fluid">
+          <div class="row">
+            <% @products.each do |product| %>
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <strong><%= product.name %></strong>
+                  </div>
+
+                  <div class="panel-body text-center">
+                    <svg width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:tumbnail">
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c"></rect>
+                      <text x="50%" y="50%" fill="#eceeef" dy=".3em"><%= product.name %></text>
+                    </svg>
+
+                    <p style="margin-top: 15px;"><%= product.description %></p>
+
+                    <button type="button" class="btn btn-default btn-sm">Add no carrinho</button>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="apple_pagination">
+          <%= will_paginate @products, container: false %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

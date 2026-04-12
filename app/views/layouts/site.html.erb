@@ -20,6 +20,7 @@
 <body style="padding-top: 70px;">
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -28,10 +29,39 @@
           <span class="icon-bar"></span>
         </button>
 
-        <%= link_to "Site Bicão Burguer", '/home', class: "navbar-brand" %>
+        <%= link_to "Site Bicão Burguer", "/home", class: "navbar-brand" %>
       </div>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to "Home", "/" %>
+          </li>
+          <li>
+            <%= link_to "Carrinho", "/carrinho" %>
+          </li>
+
+          <% if true %>
+            <li>
+              <%= link_to "Perfil", "/cliente/cadastrar" %>
+            </li>
+            <li>
+              <%= link_to "Sair", "/cliente/sair" %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Login", "/cliente/logar" %>
+            </li>
+            <li>
+              <%= link_to "Cadastro", "/cliente/cadastrar" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
     </div>
   </nav>
+
   <div class="container">
     <% flash.each do |name, msg| %>
       <%= content_tag :div, class: "alert alert-#{name.to_s == "error" ? "danger" : "success"} alert-dismissable", role: "alert" do %>
@@ -45,5 +75,14 @@
 
     <%= yield %>
   </div>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">© Bicão Burger by Pablo Wendrey Sousa Marinho 2026</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
 </body>
 </html>
